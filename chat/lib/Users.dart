@@ -1,14 +1,42 @@
+import 'package:chat_app/API.dart';
 import 'package:chat_app/chatitem.dart';
 import 'package:chat_app/chatscreen.dart';
 import 'package:chat_app/userlistItem.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class ChatUsers extends StatefulWidget {
   @override
   _ChatUsersState createState() => _ChatUsersState();
 }
 
+Future getUsers() {
+ var url = "http://10.221.2.164:8084/chat";
+ return http.get(url);
+}
+
+var users = new List<RegisterUser>();
+
 class _ChatUsersState extends State<ChatUsers> {
+
+
+_getUsers() async {
+ await getUsers().then((response) {
+   setState(() {
+     Iterable list = json.decode(response.body);
+    users = list.map((model) => RegisterUser.fromJson(model)).toList();
+    print(users.length);
+   });
+ });
+}
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getUsers();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,9 +73,9 @@ class ChatUsersListScreen extends StatelessWidget {
 
 Widget _myListView() {
  return ListView.builder(
-   itemCount: 5,
+   itemCount: users.length,
    itemBuilder: (context, index) {
-     return Card(child: ChatItemList());
+     return Card(child: ChatItemList(users:users[index]));
    },
  );
 }

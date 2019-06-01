@@ -1,12 +1,21 @@
+import 'package:chat_app/API.dart';
 import 'package:chat_app/chatscreen.dart';
 import 'package:flutter/material.dart';
 
+
 class ChatItemList extends StatefulWidget {
+
+final RegisterUser users;
+  ChatItemList({this.users});
+  
   @override
   _ChatItemListState createState() => _ChatItemListState();
 }
 
+
+
 class _ChatItemListState extends State<ChatItemList> {
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -35,7 +44,7 @@ class _ChatItemListState extends State<ChatItemList> {
           child: Row(
             children: <Widget>[
               new Text(
-                'UserName',
+                '${widget.users.name}',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
