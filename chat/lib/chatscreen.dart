@@ -1,4 +1,5 @@
 import 'package:chat_app/chatitem.dart';
+import 'package:chat_app/chatitemright.dart';
 import 'package:flutter/material.dart';
 
 class ChatScreen extends StatefulWidget {
@@ -31,7 +32,11 @@ Widget _myListView() {
  return ListView.builder(
    itemCount: 15,
    itemBuilder: (context, index) {
-     return Card(child: ChatItem());
+     if (index % 2 == 0) {  
+       return Card(child: ChatItem());
+     } else {
+      return Card(child: ChatItemRight());
+     }
    },
  );
 }

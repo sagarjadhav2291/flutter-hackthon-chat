@@ -35,13 +35,13 @@ class _ChatItemListState extends State<ChatItemList> {
           child: Row(
             children: <Widget>[
               new Text(
-                'Sagar Jadhav',
+                'UserName',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               ),
               new Expanded(child: Container()),
               Text(
-                '11:30 AM',
+                '',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
               )
